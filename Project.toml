@@ -7,11 +7,12 @@ version = "0.1.0"
 ComoniconTypes = "d0eb39ce-029e-40d1-add6-e32b3165f6a3"
 
 [compat]
-ComoniconTypes = "0.1"
+ComoniconTypes = "0.2"
 julia = "1.6.1"
 
 [extras]
+ComoniconTestUtils = "53b67e40-53a7-4335-973f-e3e901fe4865"
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
 
 [targets]
-test = ["Test"]
+test = ["Test", "ComoniconTestUtils"]

@@ -2,7 +2,9 @@ module ComoniconZSHCompletion
 
 using ComoniconTypes
 
-function emit_zshcompletion(cmd::CLIEntry)
+const tab = " "
+
+function emit_zshcompletion(cmd::Entry)
     name = cmd.root.name
     "#compdef _$name $name \n" * emit_zshcompletion("_", cmd.root, true)
 end
@@ -57,7 +59,7 @@ function emit_zshcompletion(prefix::String, cmd::NodeCommand, entry::Bool)
         """,
     )
 
-    for each in cmd.subcmds
+    for (_, each) in cmd.subcmds
         push!(script, emit_zshcompletion(prefix * cmd.name * "_", each, false))
     end
 
@@ -82,7 +84,7 @@ function emit_zshcompletion(prefix::String, cmd::LeafCommand, entry::Bool)
     body = join(map(x -> tab * x, lines), "\n")
 
     return """
-    function $prefix$(cmd_name(cmd))() {
+    function $prefix$(cmd.name)() {
     $body
     }
     """
